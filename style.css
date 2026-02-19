@@ -33,25 +33,21 @@ header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-botto
 }
 
 /* --- Social Links --- */
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
+.social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
+.social-links a { color: #a8b2d1; font-size: 1.8rem; transition: color 0.3s ease, transform 0.3s ease; }
+.social-links a:hover { color: #64ffda; transform: translateY(-3px); }
 
-.social-links a {
-    color: #a8b2d1;
+/* --- Titoli di Sezione --- */
+.section-title {
     font-size: 1.8rem;
-    transition: color 0.3s ease, transform 0.3s ease;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+    padding-bottom: 0.5rem;
+    display: inline-block;
 }
 
-.social-links a:hover {
-    color: #64ffda;
-    transform: translateY(-3px); /* Effetto sollevamento al passaggio del mouse */
-}
-
-/* --- Griglia e Schede --- */
+/* --- Griglia e Schede (Research Areas) --- */
 .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
 
 .card {
@@ -64,23 +60,50 @@ header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-botto
     transition: transform 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
-
 .card h2 { color: #ffffff; margin-bottom: 1rem; font-size: 1.4rem; z-index: 2; position: relative; }
 .card p { line-height: 1.6; color: #a8b2d1; z-index: 2; position: relative; }
 
-/* --- Effetto Transito Esopianeta --- */
 .transit-card::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: -50%;
-    width: 150px; height: 150px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    transform: translateY(-50%);
-    transition: left 0.8s ease-in-out;
-    z-index: 1;
-    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    content: ''; position: absolute; top: 50%; left: -50%;
+    width: 150px; height: 150px; background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%; transform: translateY(-50%);
+    transition: left 0.8s ease-in-out; z-index: 1; box-shadow: 0 0 30px rgba(0,0,0,0.8);
 }
-
 .transit-card:hover { transform: translateY(-5px); border-color: #64ffda; }
 .transit-card:hover::before { left: 120%; }
+
+/* --- Pubblicazioni --- */
+.publications-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.pub-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 4px solid #1d4ed8;
+    padding: 1.5rem;
+    border-radius: 4px 8px 8px 4px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.pub-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #64ffda;
+}
+
+.pub-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.pub-title a { color: #ffffff; text-decoration: none; transition: color 0.3s ease; }
+.pub-title a:hover { color: #64ffda; }
+
+.pub-authors { color: #a8b2d1; font-size: 1rem; margin-bottom: 0.3rem; }
+.pub-authors strong { color: #e0e0e0; font-weight: 600; } /* Evidenzia il tuo nome */
+
+.pub-journal { color: #8892b0; font-size: 0.9rem; margin-bottom: 1rem; }
+
+.pub-links { display: flex; gap: 1rem; }
+.pub-links a {
+    color: #64ffda; font-size: 0.9rem; text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.3s ease;
+}
+.pub-links a:hover { opacity: 0.7; }
