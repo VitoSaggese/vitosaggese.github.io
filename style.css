@@ -7,30 +7,72 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Effetto Cursore Spaziale --- */
-.space-background {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: -1;
-    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(29, 78, 216, 0.15), 
-                transparent 40%);
+/* --- PRELOADER (Animazione di Transito) --- */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #0a0a0f; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-/* --- Layout Contenuti --- */
-.content { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+.loader-system {
+    position: relative; width: 100px; height: 100px; margin-bottom: 2rem;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.star {
+    width: 40px; height: 40px; background: #fff; border-radius: 50%;
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.8);
+}
+
+.planet {
+    position: absolute; width: 15px; height: 15px;
+    background: #0a0a0f; border-radius: 50%;
+    animation: orbitTransit 2s infinite linear;
+}
+
+@keyframes orbitTransit {
+    0% { transform: translateX(-60px); z-index: 2; }
+    50% { transform: translateX(60px); z-index: 2; }
+    50.1% { z-index: -1; } /* Passa dietro la stella */
+    100% { transform: translateX(-60px); z-index: -1; }
+}
+
+.loader-text {
+    color: #64ffda; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase;
+    animation: pulseText 1.5s infinite alternate;
+}
+
+@keyframes pulseText {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Nasconde il preloader quando il body ha la classe 'loaded' */
+body.loaded #preloader { opacity: 0; visibility: hidden; }
+
+/* --- Effetto Comparsa dei Contenuti --- */
+.content { 
+    max-width: 900px; margin: 0 auto; padding: 4rem 2rem; 
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition-delay: 0.3s; /* Parte poco prima che il preloader sia sparito del tutto */
+}
+body.loaded .content { opacity: 1; transform: translateY(0); }
+
+
+/* --- Effetto Cursore Spaziale --- */
+.space-background {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(29, 78, 216, 0.15), transparent 40%);
+}
+
+/* --- Layout Contenuti & Testi --- */
 header { text-align: center; margin-bottom: 4rem; }
 header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-bottom: 0.5rem; }
 .subtitle { color: #64ffda; font-size: 1.2rem; font-weight: 400; margin-bottom: 2rem; }
-
-/* --- About Me --- */
-.about-me {
-    max-width: 700px;
-    margin: 0 auto 2rem auto;
-    line-height: 1.8;
-    color: #8892b0;
-    font-size: 1.1rem;
-}
+.about-me { max-width: 700px; margin: 0 auto 2rem auto; line-height: 1.8; color: #8892b0; font-size: 1.1rem; }
 
 /* --- Social Links --- */
 .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
@@ -39,30 +81,19 @@ header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-botto
 
 /* --- Titoli di Sezione --- */
 .section-title {
-    font-size: 1.8rem;
-    color: #ffffff;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-    padding-bottom: 0.5rem;
-    display: inline-block;
+    font-size: 1.8rem; color: #ffffff; margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2); padding-bottom: 0.5rem; display: inline-block;
 }
 
 /* --- Griglia e Schede (Research Areas) --- */
 .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-
 .card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem; border-radius: 12px; position: relative; overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease; cursor: pointer;
 }
 .card h2 { color: #ffffff; margin-bottom: 1rem; font-size: 1.4rem; z-index: 2; position: relative; }
 .card p { line-height: 1.6; color: #a8b2d1; z-index: 2; position: relative; }
-
 .transit-card::before {
     content: ''; position: absolute; top: 50%; left: -50%;
     width: 150px; height: 150px; background: rgba(0, 0, 0, 0.5);
@@ -73,37 +104,18 @@ header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-botto
 .transit-card:hover::before { left: 120%; }
 
 /* --- Pubblicazioni --- */
-.publications-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
+.publications-section { display: flex; flex-direction: column; gap: 1.5rem; }
 .pub-item {
-    background: rgba(255, 255, 255, 0.02);
-    border-left: 4px solid #1d4ed8;
-    padding: 1.5rem;
-    border-radius: 4px 8px 8px 4px;
-    transition: background 0.3s ease, border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.02); border-left: 4px solid #1d4ed8;
+    padding: 1.5rem; border-radius: 4px 8px 8px 4px; transition: background 0.3s ease, border-color 0.3s ease;
 }
-
-.pub-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: #64ffda;
-}
-
+.pub-item:hover { background: rgba(255, 255, 255, 0.05); border-color: #64ffda; }
 .pub-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .pub-title a { color: #ffffff; text-decoration: none; transition: color 0.3s ease; }
 .pub-title a:hover { color: #64ffda; }
-
 .pub-authors { color: #a8b2d1; font-size: 1rem; margin-bottom: 0.3rem; }
-.pub-authors strong { color: #e0e0e0; font-weight: 600; } /* Evidenzia il tuo nome */
-
+.pub-authors strong { color: #e0e0e0; font-weight: 600; }
 .pub-journal { color: #8892b0; font-size: 0.9rem; margin-bottom: 1rem; }
-
 .pub-links { display: flex; gap: 1rem; }
-.pub-links a {
-    color: #64ffda; font-size: 0.9rem; text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.3s ease;
-}
+.pub-links a { color: #64ffda; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.3s ease; }
 .pub-links a:hover { opacity: 0.7; }
