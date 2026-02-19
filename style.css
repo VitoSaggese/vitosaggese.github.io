@@ -119,3 +119,44 @@ header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-botto
 .pub-links { display: flex; gap: 1rem; }
 .pub-links a { color: #64ffda; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.3s ease; }
 .pub-links a:hover { opacity: 0.7; }
+
+
+/* =========================================
+   OTTIMIZZAZIONE PER SMARTPHONE E TABLET
+   ========================================= */
+
+/* Disabilita gli effetti "hover" sui dispositivi touch per evitare blocchi */
+@media (hover: none) {
+    .transit-card:hover { transform: none; border-color: rgba(255, 255, 255, 0.1); }
+    .transit-card:hover::before { left: -50%; } /* Disattiva l'animazione fissa */
+    .pub-item:hover { background: rgba(255, 255, 255, 0.02); border-color: #1d4ed8; }
+}
+
+/* Adatta testi e spazi per schermi stretti (es. iPhone, Android) */
+@media (max-width: 768px) {
+    .content {
+        padding: 2rem 1.5rem; /* Riduciamo i bordi laterali */
+    }
+    
+    header h1 {
+        font-size: 2.2rem; /* Titolo più piccolo per non andare a capo male */
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .about-me {
+        font-size: 1rem;
+        text-align: justify; /* Migliora la lettura su mobile */
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .pub-links {
+        flex-direction: column; /* Mette i bottoni del paper uno sotto l'altro */
+        gap: 0.5rem;
+    }
+}
