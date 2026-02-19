@@ -2,7 +2,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
 body {
-    background-color: #0a0a0f; /* Nero profondo siderale */
+    background-color: #0a0a0f;
     color: #e0e0e0;
     overflow-x: hidden;
 }
@@ -12,7 +12,6 @@ body {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -1;
-    /* Un gradiente radiale che funge da "luce" legata al cursore */
     background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
                 rgba(29, 78, 216, 0.15), 
                 transparent 40%);
@@ -21,8 +20,36 @@ body {
 /* --- Layout Contenuti --- */
 .content { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
 header { text-align: center; margin-bottom: 4rem; }
-header h1 { font-size: 3rem; color: #fff; letter-spacing: 2px; }
-header p { color: #8892b0; font-size: 1.2rem; margin-top: 10px; }
+header h1 { font-size: 3.5rem; color: #ffffff; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.subtitle { color: #64ffda; font-size: 1.2rem; font-weight: 400; margin-bottom: 2rem; }
+
+/* --- About Me --- */
+.about-me {
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.8;
+    color: #8892b0;
+    font-size: 1.1rem;
+}
+
+/* --- Social Links --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: #a8b2d1;
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #64ffda;
+    transform: translateY(-3px); /* Effetto sollevamento al passaggio del mouse */
+}
 
 /* --- Griglia e Schede --- */
 .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
@@ -33,22 +60,21 @@ header p { color: #8892b0; font-size: 1.2rem; margin-top: 10px; }
     padding: 2rem;
     border-radius: 12px;
     position: relative;
-    overflow: hidden; /* Nasconde l'effetto transito fuori dalla scheda */
+    overflow: hidden;
     transition: transform 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
 
-.card h2 { color: #64ffda; margin-bottom: 1rem; font-size: 1.5rem; z-index: 2; position: relative; }
+.card h2 { color: #ffffff; margin-bottom: 1rem; font-size: 1.4rem; z-index: 2; position: relative; }
 .card p { line-height: 1.6; color: #a8b2d1; z-index: 2; position: relative; }
 
 /* --- Effetto Transito Esopianeta --- */
-/* Creiamo un cerchio scuro fittizio che attraversa la scheda quando ci passi il mouse */
 .transit-card::before {
     content: '';
     position: absolute;
     top: 50%; left: -50%;
     width: 150px; height: 150px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     transform: translateY(-50%);
     transition: left 0.8s ease-in-out;
@@ -57,6 +83,4 @@ header p { color: #8892b0; font-size: 1.2rem; margin-top: 10px; }
 }
 
 .transit-card:hover { transform: translateY(-5px); border-color: #64ffda; }
-
-/* Il pianeta "transita" da sinistra a destra sulla scheda */
 .transit-card:hover::before { left: 120%; }
