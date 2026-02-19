@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricerca | Esopianeti & ML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="space-background" id="space-bg"></div>
+
+    <div class="content">
+        <header>
+            <h1>Dr. Nome Cognome</h1>
+            <p>Astrophysics & Machine Learning Researcher</p>
+        </header>
+
+        <section class="research-grid">
+            <div class="card transit-card">
+                <h2>Exoplanet Transits</h2>
+                <p>Analisi delle curve di luce per l'identificazione di nuovi candidati planetari.</p>
+            </div>
+
+            <div class="card transit-card">
+                <h2>Microlensing</h2>
+                <p>Rilevamento di pianeti freddi e masse oscure tramite lenti gravitazionali.</p>
+            </div>
+
+            <div class="card transit-card">
+                <h2>Machine Learning per Marte</h2>
+                <p>Reti neurali applicate alla classificazione morfologica della superficie marziana.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
